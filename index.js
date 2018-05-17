@@ -1,5 +1,6 @@
 const app = {
     init(selectors){
+        this.items = []
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
 
@@ -24,6 +25,9 @@ const app = {
             id: ++this.max,
             name: f.itemName.value,
         }
+        
+        this.items.push(item)
+
         const listItem = this.renderListItem(item)
         this.list.appendChild(listItem)
         f.reset()
