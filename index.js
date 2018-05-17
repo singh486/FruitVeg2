@@ -27,10 +27,10 @@ const app = {
             name: f.itemName.value,
         }
 
-        this.items.push(item)
+        this.items.unshift(item)
 
         const listItem = this.renderListItem(item)
-        this.list.appendChild(listItem)
+        this.list.insertBefore(listItem, this.list.firstChild)
         f.reset()
     },
 }
