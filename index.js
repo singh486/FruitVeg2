@@ -1,16 +1,36 @@
 const app = {
-    init: function(formSelector){
+    init(selectors){
+        this.max = 0
+        this.list = document.querySelector(selectors.listSelector)
+
         document
-            .querySelector(formSelector)
-            .addEventListener('submit', this.handleSubmit)
+            .querySelector(selectors.formSelector)
+            .addEventListener('submit', ev => {
+                ev.preventDefault()
+                this.handleSubmit(ev)
+            })
     },
 
-    handleSubmit: function(ev){
-        ev.preventDefault()
-        const f = ev.target
+    renderListItem(input){
+        const li = document.createElement('li')
+        li.textContent = input.name
+        return li
+    },
+
+    handleSubmit(ev){
         
-        console.log(f.itemName.value)
+        const f = ev.target
+        const item = {
+            id: ++this.max,
+            name: f.itemName.value,
+        }
+        const listItem = this.renderListItem(item)
+        this.list.appendChild(listItem)
+        f.reset()
     },
 }
 
-app.init('#itemForm')
+app.init({
+    formSelector: '#itemForm',
+    listSelector: '#itemList',
+})
