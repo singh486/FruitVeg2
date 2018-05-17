@@ -14,6 +14,7 @@ const app = {
 
     renderListItem(input){
         const li = document.createElement('li')
+        li.dataset.id = input.id
         li.textContent = input.name
         return li
     },
@@ -25,7 +26,7 @@ const app = {
             id: ++this.max,
             name: f.itemName.value,
         }
-        
+
         this.items.push(item)
 
         const listItem = this.renderListItem(item)
