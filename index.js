@@ -55,7 +55,21 @@ const app = {
 
         const upButton = li.querySelector('.actions').querySelector('#up')
         upButton.addEventListener('click', ev=>{
-            console.log("up")
+            // var copy = document.createElement('li')
+            // copy.textContent = "test"
+            for (var i = 1, len = this.items.length; i < len; i++) {
+                if(Object.is(this.items[i], input)){
+                    var temp = this.items[i-1]
+                    var tempUl = ul.childNodes[i-1].cloneNode(true)
+
+                    this.items[i-1] = input
+                    ul.replaceChild(upButton.parentNode.parentNode, ul.childNodes[i-1])
+
+                    this.items[i] = temp
+                   // ul.replaceChild(tempUl, ul.childNodes[i])
+                }
+            }
+            console.log(this.items)
         })
         return li
     },
