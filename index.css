@@ -2,10 +2,10 @@ main{
     width: 80%;
     margin: 1rem auto;
 }
-
+/* 
 .actions .button{
-    margin-bottom: 0;
-}
+    /*margin-bottom: 0;*/
+} */
 
 .itemName{
     margin: 0 0 .75rem;
@@ -14,3 +14,4 @@ main{
 .template{
     display: none;
 }
+
