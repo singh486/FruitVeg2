@@ -24,7 +24,7 @@ const app = {
         //console.log(li.querySelector('.actions').textContent)
         const deleteButton = li.querySelector('.actions').querySelector('.alert')
         deleteButton.addEventListener('click', ev => {
-            deleteButton.parentNode.parentNode.textContent = ""
+            li.textContent = ""
             for (var i = 0, len = this.items.length; i < len; i++) {
                 if(Object.is(this.items[i], input)){
                     this.items.splice(i,1)
@@ -58,7 +58,6 @@ const app = {
             for (var i = 1, len = this.items.length; i < len; i++) {
                 if(Object.is(this.items[i], input)){
                     var temp = this.items[i-1]
-                    console.log(i)
                     this.items[i-1] = input
                     this.items[i] = temp
                     break
@@ -74,7 +73,6 @@ const app = {
             for (var i = 0, len = this.items.length; i < len-1; i++) {
                 if(this.items[i]== input){
                     var temp = this.items[i+1]
-                    console.log(i)
                     this.items[i] = temp
                     this.items[i+1] = input
                     break
@@ -83,6 +81,11 @@ const app = {
             }
             this.reprintList()
             console.log(this.items)
+        })
+
+        const editButton = li.querySelector('.actions').querySelector('#edit')
+        editButton.addEventListener('click', ev=>{
+            li.contentEditable = 'true'
         })
         return li
     },
@@ -119,4 +122,11 @@ app.init({
     formSelector: '#itemForm',
     listSelector: '#itemList',
     templateSelector: '.item.template',
+})
+
+document.addEventListener('keydown', ev=>{
+    if(ev.keyCode == 13){
+        document.getElementById('itemForm').focus()
+        //document.getElementById('itemForm').select()
+    }
 })
