@@ -55,23 +55,47 @@ const app = {
 
         const upButton = li.querySelector('.actions').querySelector('#up')
         upButton.addEventListener('click', ev=>{
-            // var copy = document.createElement('li')
-            // copy.textContent = "test"
             for (var i = 1, len = this.items.length; i < len; i++) {
                 if(Object.is(this.items[i], input)){
                     var temp = this.items[i-1]
-                    var tempUl = ul.childNodes[i-1].cloneNode(true)
-
+                    console.log(i)
                     this.items[i-1] = input
-                    ul.replaceChild(upButton.parentNode.parentNode, ul.childNodes[i-1])
-
                     this.items[i] = temp
-                   // ul.replaceChild(tempUl, ul.childNodes[i])
+                    break
+                    //ul.replaceChild(tempUl, ul.childNodes[i])
                 }
             }
+            this.reprintList()
+            console.log(this.items)
+        })
+
+        const downButton = li.querySelector('.actions').querySelector('#down')
+        downButton.addEventListener('click', ev=>{
+            for (var i = 0, len = this.items.length; i < len-1; i++) {
+                if(this.items[i]== input){
+                    var temp = this.items[i+1]
+                    console.log(i)
+                    this.items[i] = temp
+                    this.items[i+1] = input
+                    break
+                    //ul.replaceChild(tempUl, ul.childNodes[i])
+                }
+            }
+            this.reprintList()
             console.log(this.items)
         })
         return li
+    },
+
+    reprintList(){
+        const ul = document.getElementById('itemList')
+        ul.innerHTML = ""
+
+        this.items.forEach(function(element) {
+            const listItem = this.renderListItem(element)
+            this.list.appendChild(listItem)        
+        }, this);
+
     },
 
     handleSubmit(ev){
