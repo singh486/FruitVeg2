@@ -17,6 +17,55 @@ const app = {
 
     },
 
+    bubbleSort(option){
+        if(option == 0){//low to high
+            for(var i=0; i<this.items.length; i++){
+                for(var j=0; j<this.items.length - 1; j++){
+                    if(this.items[j].date > this.items[j+1].date){
+                        var temp = this.items[j]
+                        this.items[j] = this.items[j+1]
+                        this.items[j+1] = temp
+                    }
+                }
+            }
+        }else{//high to low
+            for(var i=0; i<this.items.length; i++){
+                for(var j=0; j<this.items.length - 1; j++){
+                    if(this.items[j].date < this.items[j+1].date){
+                        var temp = this.items[j]
+                        this.items[j] = this.items[j+1]
+                        this.items[j+1] = temp
+                    }
+                }
+            }
+        }
+    },
+
+    viewBy(){
+        const select = document.getElementById("select")
+        select.onchange = (ev=>{
+            console.log(select.value)
+            switch(select.value){
+                case "All":
+                    this.reprintList()
+                    break
+                case "Earliest to Latest":
+                    this.bubbleSort(0)
+                    this.reprintList()
+                    break
+                case "Latest to Earliest":
+                    this.bubbleSort(1)
+                    this.reprintList()
+                    break
+                case "Favorites":
+                    this.reprintList("fav")
+                    break
+            }
+        })
+        
+
+    },
+
     renderListItem(input){
         const ul = document.getElementById('itemList')
         const li = this.template.cloneNode(true)
@@ -93,16 +142,27 @@ const app = {
         return li
     },
 
-    reprintList(){
+    reprintList(option){
         const ul = document.getElementById('itemList')
         ul.innerHTML = ""
 
         this.items.forEach(function(element) {
-            const listItem = this.renderListItem(element)
-            if(element.fav){
-                listItem.style.backgroundColor = "#6699ff"
+            if(option == "fav"){
+                if(element.fav){
+                    var listItem = this.renderListItem(element);
+                    if(element.fav){
+                        listItem.style.backgroundColor = "#6699ff"
+                    }
+                    this.list.appendChild(listItem)   
+                }
+            }else{
+                var listItem = this.renderListItem(element);
+                if(element.fav){
+                    listItem.style.backgroundColor = "#6699ff"
+                }
+                this.list.appendChild(listItem)  
             }
-            this.list.appendChild(listItem)        
+                 
         }, this);
 
     },
@@ -131,6 +191,8 @@ app.init({
     listSelector: '#itemList',
     templateSelector: '.item.template',
 })
+
+app.viewBy()
 
 // document.addEventListener('keydown', ev=>{
 //     if(ev.keyCode == 13){
