@@ -2,7 +2,6 @@ const app = {
     //Packing list app?
     init(selectors){
         this.items = []
-        this.dates = []
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
         this.template = document.querySelector(selectors.templateSelector)
@@ -137,8 +136,18 @@ const app = {
 
         const editButton = li.querySelector('.actions').querySelector('#edit')
         editButton.addEventListener('click', ev=>{
+            console.log(li.querySelector(".itemName").textContent)
             li.contentEditable = 'true'
+
         })
+        // for (var i = 0, len = this.items.length; i < len; i++) {
+        //     if(Object.is(this.items[i], input)){
+        //         this.items[i].name = li.querySelector(".itemName").textContent
+        //     }
+        // }
+        
+        //input.name = li.textContent
+        
         return li
     },
 
@@ -178,7 +187,6 @@ const app = {
         }
 
         this.items.unshift(item)
-        this.dates.unshift(item.date)
 
         const listItem = this.renderListItem(item)
         this.list.insertBefore(listItem, this.list.firstChild)
