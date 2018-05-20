@@ -1,6 +1,8 @@
 const app = {
+    //Packing list app?
     init(selectors){
         this.items = []
+        this.dates = []
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
         this.template = document.querySelector(selectors.templateSelector)
@@ -21,10 +23,11 @@ const app = {
         li.classList.remove('template')
         li.dataset.id = input.id
         li.querySelector('.itemName').textContent = input.name
+        li.querySelector('#dateDisplay').textContent = input.date
         //console.log(li.querySelector('.actions').textContent)
         const deleteButton = li.querySelector('.actions').querySelector('.alert')
         deleteButton.addEventListener('click', ev => {
-            li.textContent = ""
+            li.remove()
             for (var i = 0, len = this.items.length; i < len; i++) {
                 if(Object.is(this.items[i], input)){
                     this.items.splice(i,1)
@@ -96,21 +99,26 @@ const app = {
 
         this.items.forEach(function(element) {
             const listItem = this.renderListItem(element)
+            if(element.fav){
+                listItem.style.backgroundColor = "#6699ff"
+            }
             this.list.appendChild(listItem)        
         }, this);
 
     },
 
     handleSubmit(ev){
-        
+        //console.log(document.querySelector("#date").value)
         const f = ev.target
         const item = {
             id: ++this.max,
             name: f.itemName.value,
+            date: document.querySelector("#date").value,
             fav: false,
         }
 
         this.items.unshift(item)
+        this.dates.unshift(item.date)
 
         const listItem = this.renderListItem(item)
         this.list.insertBefore(listItem, this.list.firstChild)
@@ -124,9 +132,9 @@ app.init({
     templateSelector: '.item.template',
 })
 
-document.addEventListener('keydown', ev=>{
-    if(ev.keyCode == 13){
-        document.getElementById('itemForm').focus()
-        //document.getElementById('itemForm').select()
-    }
-})
+// document.addEventListener('keydown', ev=>{
+//     if(ev.keyCode == 13){
+//         document.getElementById('itemForm').focus()
+//         //document.getElementById('itemForm').select()
+//     }
+// })

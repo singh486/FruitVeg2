@@ -2,9 +2,12 @@ main{
     width: 80%;
     margin: 1rem auto;
 }
+header{
+    text-align: center;
+}
 /* 
 .actions .button{
-    /*margin-bottom: 0;*/
+    /*margin-bottom: 0;
 } */
 
 .itemName{
@@ -13,5 +16,15 @@ main{
 
 .template{
     display: none;
+}
+
+#dateDisplay{
+    text-align: left;
+    padding: 10px;
+    padding-bottom: 21px;
+}
+
+button{
+    text-align: center;
 }
 

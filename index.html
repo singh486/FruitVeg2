@@ -9,7 +9,7 @@
   <link rel="stylesheet" type= "text/css" href="index.css">
 </head>
 <body>
-    <header><h1>FruitVeg2.0</h1></header>
+    <header><h1>Todo List</h1></header>
     
     <main>
         <form id = "itemForm">
@@ -20,8 +20,11 @@
                 name = "itemName"
                 autofocus
                 required
-                placeholder="Name a fruit or vegetable"
-            >
+                placeholder="Add a description"
+                >
+                <div><input id="date" type="date" class= "input-group-field" required></div>
+                
+                
                 <div class="input-group-button">
                     <button class= "button success" type= "submit">
                         Add item
@@ -33,12 +36,14 @@
         <ul id= "itemList" class="no-bullet">
             <li class= "template item grid-x align-middle">
                 <span class="itemName cell auto"></span>
+                <div class="auto"id = "dateDisplay"></div>
                 <span class="actions cell shrink">
-                    <button class="button alert" id="delete">del</button>
-                    <button class="button warning" id="favorite">fav</button>
+                    <button class="button alert" id="delete">🗑️</button>
+                    <button class="button warning" id="favorite">✰</button>
                     <button class="button" id="edit">✎</button>
                     <button class="button" id="up">⬆</button>
                     <button class="button" id="down">⬇</button>
+                    
                 </span>
             </li>
         </ul>
