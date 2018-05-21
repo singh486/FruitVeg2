@@ -60,8 +60,6 @@ class App{
                     break
             }
         })
-        
-
     }
 
     renderListItem(input){
@@ -122,7 +120,6 @@ class App{
                     this.items[i] = temp
                     this.items[i+1] = input
                     break
-                    //ul.replaceChild(tempUl, ul.childNodes[i])
                 }
             }
             this.reprintList()
@@ -130,31 +127,37 @@ class App{
         })
 
         const editButton = li.querySelector('.actions').querySelector('#edit')
-        editButton.addEventListener('click', ev=>{
+        editButton.addEventListener('click', this.toggleEditable.bind(this, li, input))
+        
+        li.addEventListener('keypress', this.saveOnEnter.bind(this, li, input))
+        return li
+    }
+
+    toggleEditable(li,input,ev){
             console.log(li.querySelector(".itemName").textContent)
             const nameField = li.querySelector('.itemName')
+            const dateField = li.querySelector('#dateDisplay')
             const btn = li.querySelector('#edit')
             if(nameField.isContentEditable){
                 nameField.contentEditable = false
+                dateField.contentEditable = false
+
                 btn.textContent = "✎"
 
                 input.name = nameField.textContent
+                input.date  = dateField.textContent
             }else{
                 nameField.contentEditable = true
+                dateField.contentEditable = true
                 nameField.focus()
                 btn.textContent = 'save'
             }
+    }
 
-        })
-        // for (var i = 0, len = this.items.length; i < len; i++) {
-        //     if(Object.is(this.items[i], input)){
-        //         this.items[i].name = li.querySelector(".itemName").textContent
-        //     }
-        // }
-        
-        //input.name = li.textContent
-        
-        return li
+    saveOnEnter(li, input, ev){
+        if(ev.key === 'Enter'){
+            this.toggleEditable(li, input)
+        }
     }
 
     reprintList(option){
