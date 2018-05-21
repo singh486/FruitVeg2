@@ -13,13 +13,14 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
-/* 
+
 .actions .button{
-    /*margin-bottom: 0;
-} */
+    margin-bottom: 0;
+}
 
 .itemName{
-    margin: 0 0 .75rem;
+    /*margin: 0 0 .75rem;*/
+    margin-bottom: 0;
 }
 
 .template{
@@ -29,7 +30,7 @@ body{
 #dateDisplay{
     text-align: left;
     padding: 10px;
-    padding-bottom: 21px;
+    /* padding-bottom: 5px; */
 }
 
 button{
