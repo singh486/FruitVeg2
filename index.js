@@ -95,6 +95,7 @@ class App{
                     }
                 }
             }
+            //input.fav = li.classList.toggle('fav')
             console.log(this.items)
         })
 
@@ -131,7 +132,18 @@ class App{
         const editButton = li.querySelector('.actions').querySelector('#edit')
         editButton.addEventListener('click', ev=>{
             console.log(li.querySelector(".itemName").textContent)
-            li.contentEditable = 'true'
+            const nameField = li.querySelector('.itemName')
+            const btn = li.querySelector('#edit')
+            if(nameField.isContentEditable){
+                nameField.contentEditable = false
+                btn.textContent = "✎"
+
+                input.name = nameField.textContent
+            }else{
+                nameField.contentEditable = true
+                nameField.focus()
+                btn.textContent = 'save'
+            }
 
         })
         // for (var i = 0, len = this.items.length; i < len; i++) {
