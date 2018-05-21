@@ -1,6 +1,5 @@
-const app = {
-    //Packing list app?
-    init(selectors){
+class App{
+    constructor(selectors){
         this.items = []
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
@@ -14,7 +13,7 @@ const app = {
             })
 
 
-    },
+    }
 
     bubbleSort(option){
         if(option == 0){//low to high
@@ -38,7 +37,7 @@ const app = {
                 }
             }
         }
-    },
+    }
 
     viewBy(){
         const select = document.getElementById("select")
@@ -63,7 +62,7 @@ const app = {
         })
         
 
-    },
+    }
 
     renderListItem(input){
         const ul = document.getElementById('itemList')
@@ -76,13 +75,8 @@ const app = {
         const deleteButton = li.querySelector('.actions').querySelector('.alert')
         deleteButton.addEventListener('click', ev => {
             li.remove()
-            for (var i = 0, len = this.items.length; i < len; i++) {
-                if(Object.is(this.items[i], input)){
-                    this.items.splice(i,1)
-                }
-            }
-            console.log(this.items)
-            //deleteButton.parentNode.parentNode.removeChild(deleteButton)            
+            this.items.splice(this.items.indexOf(input), 1)
+            console.log(this.items)          
         })
 
         const favoriteButton = li.querySelector('.actions').querySelector('.warning')
@@ -149,7 +143,7 @@ const app = {
         //input.name = li.textContent
         
         return li
-    },
+    }
 
     reprintList(option){
         const ul = document.getElementById('itemList')
@@ -174,7 +168,7 @@ const app = {
                  
         }, this);
 
-    },
+    }
 
     handleSubmit(ev){
         //console.log(document.querySelector("#date").value)
@@ -191,10 +185,9 @@ const app = {
         const listItem = this.renderListItem(item)
         this.list.insertBefore(listItem, this.list.firstChild)
         f.reset()
-    },
+    }
 }
-
-app.init({
+const app = new App({
     formSelector: '#itemForm',
     listSelector: '#itemList',
     templateSelector: '.item.template',
